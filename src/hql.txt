@@ -1,0 +1,74 @@
+How to implement multiple Projection on Hibernate?
+
+Hibernate provide ProjectionList interface to implement Multiple projections of column.
+
+ProjectionList ref=Projections.projectionList();
+ref.add(Projections.property("proName"));
+ref.add(Projections.property("price"));	
+crit.setProjection(ref);   //crit is the reference of Criteria Interface
+
+
+HQL Concept in Hibernate?
+
+HQL is used to provide set of query to implement database operation using Hibernate Framework.
+
+We can perform complete CRUD Operation using HQL Query.
+
+1)  Syntax of HQL for Data Selection
+
+    Query ref =  session.createQuery("from POJOCLASSNAME ref")
+
+    Query q = session.createQuery("from Student s");
+
+    Query ref =  session.createQuery("Select ref.columnname,ref.columnname from POJOCLASSNAME ref")
+
+    Query q = session.createQuery("Select s.rno,s.sname from Student s");
+
+
+     Query ref =  session.createQuery("from POJOCLASSNAME ref where ref.columnname=?")
+      Query ref =  session.createQuery("from POJOCLASSNAME ref where ref.columnname=:argument")
+ q.setString("argument","value");
+
+
+    Query q = session.createQuery("from Student s where s.rno=?");
+    q.setString(0,"value");
+
+    Query q = session.createQuery("from Student s where s.rno=? and s.name=?");
+    q.setString(0,"valueofrno");
+    q.setString(1,"valueofname");
+
+     
+
+    Query q = session.createQuery("select s.rno,s.name from Student s where s.rno=? and s.name=?");
+    q.setString(0,"valueofrno");
+    q.setString(1,"valueofname");
+    
+
+
+HQL Query for data updation?
+
+update PojoClassname ref set p.proName=? where ref.columnName=?
+qry.setParameter(0,"updated..");
+int res = qry.executeUpdate();
+
+HQL Query for data deletion?
+
+delete from PojoClassname ref where ref.columnname=?
+qry.setParameter(0,"deleted..");
+int res = qry.executeUpdate();
+
+HQL Query for data insertion?
+
+insert into POJOCLASSNAME(var1,var2,var3)
+select ref.col1,ref.col2 from POJOCLASS ref where ref.columnname= ?")
+
+
+insert into POJOCLASSNAME(var1,var2,var3) values(?,?,?))
+
+ref.setParameters(0,paramvalue)
+int res = qry.executeUpdate();
+
+
+
+
+	
